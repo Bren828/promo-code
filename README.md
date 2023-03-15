@@ -3,6 +3,8 @@ Language: **English** or [Russian](https://github.com/Bren828/promo-code/blob/ma
 # promo-code
 Текс
 
+![Crosshair](https://raw.githubusercontent.com/Bren828/promo-code/main/preview.gif)
+
 ## Reference
 * [Download](https://github.com/Bren828/promo-code#download)
 * [Installation](https://github.com/Bren828/promo-code#installation)
