@@ -1,7 +1,7 @@
 Language: **English** or [Russian](https://github.com/Bren828/promo-code/blob/main/README.md)
 
 # promo-code
-Текс
+Создание промокодов с нужной категорией в SAMP
 
 ![Crosshair](https://raw.githubusercontent.com/Bren828/promo-code/main/preview.gif)
 
