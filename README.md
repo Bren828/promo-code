@@ -27,7 +27,84 @@ Include in your code and begin using the library:
 ## Example
 
 ```pawn
+public OnGameModeInit()
+{
+    PromoCodeCategoryCreate("Skill TEC9");
+    PromoCodeCategoryCreate("Money");
+    return 1;
+}
 
+
+forward OnPlayerPromoCodeActivation(playerid, name[], promo_code_id, activation_count, remaining_activation_count);
+public OnPlayerPromoCodeActivation(playerid, name[], promo_code_id, activation_count, remaining_activation_count)
+{
+    new category_value;
+    if(GetPromoCodeCategoryName(promo_code_id, "Skill TEC9", category_value))
+    {
+        SetPlayerSkillLevel(playerid, 32, category_value);
+    }
+    if(GetPromoCodeCategoryName(promo_code_id, "Money", category_value))
+    {
+        GivePlayerMoney(playerid, category_value);
+    }
+    
+    
+    // Mysql R39-6 save example
+    static const mysql_str[] = "UPDATE promo_code SET activation_count=%d,remaining_activation_count=%d WHERE name='%s' LIMIT 1";
+    new string[ sizeof(mysql_str) + PC_MAX_NAME_SIZE + 10 + 10];
+
+    mysql_format(mysql, string, sizeof(string), mysql_str, activation_count, remaining_activation_count, name);
+    mysql_tquery(mysql, string);
+    return 0;
+}
+
+forward OnPlayerPromoCodeCreate(playerid, const name[], remaining_activation_count, expiration_date, const category_names[], const category_value[]);
+public OnPlayerPromoCodeCreate(playerid, const name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
+{
+    printf("Create --->>> name: %s | remaining_activation_count: %d | expiration_date: %d | category_names: '%s' | category_value: '%s' |", 
+    name, remaining_activation_count, expiration_date, category_names, category_value);
+
+
+    // Mysql R39-6 save example
+    static const mysql_str[] = "INSERT INTO promo_code (`name`,`activation_count`,`remaining_activation_count`,`expiration_date`,`category_names`,`category_value`) VALUE ('%s','0','%d','%d','%s','%s')";
+    new string[ sizeof(mysql_str) + PC_MAX_NAME_SIZE + 10 + 10 +( (PC_MAX_CATEGORY_NAME_SIZE+1) * PC_MAX_CATEGORY_IN_PROMO_CODE ) + ( 11 * PC_MAX_CATEGORY_IN_PROMO_CODE ) ];
+
+    mysql_format(mysql, string, sizeof(string), mysql_str, name, remaining_activation_count, expiration_date, category_names, category_value);
+    mysql_query(mysql, string);
+    return 1;
+}
+
+forward OnPlayerPromoCodeEdit(playerid, const old_name[], const new_name[], remaining_activation_count, expiration_date, const category_names[], const category_value[]);
+public OnPlayerPromoCodeEdit(playerid, const old_name[], const new_name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
+{
+    printf("Edit --->>> old_name: %s | new_name: %s | remaining_activation_count: %d | expiration_date: %d | category_names: '%s' | category_value: '%s' |", 
+    old_name, new_name, remaining_activation_count, expiration_date, category_names, category_value);
+	
+
+    // Mysql R39-6 save example
+    static const mysql_str[] = "UPDATE promo_code SET name='%s',remaining_activation_count=%d,expiration_date=%d,category_names='%s',category_value='%s' WHERE name='%s' LIMIT 1";
+    new string[ sizeof(mysql_str) + PC_MAX_NAME_SIZE + 10 + 10 +( (PC_MAX_CATEGORY_NAME_SIZE+1) * PC_MAX_CATEGORY_IN_PROMO_CODE ) + ( 11 * PC_MAX_CATEGORY_IN_PROMO_CODE ) ];
+
+    mysql_format(mysql, string, sizeof(string), mysql_str, new_name, remaining_activation_count, expiration_date, category_names, category_value, old_name);
+    mysql_tquery(mysql, string);
+    return 1;
+}
+
+forward OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id);
+public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
+{
+    printf("Delete --->>> name: %s | promo_code_id: %d |", 
+        name, promo_code_id);
+
+
+    // Mysql R39-6 save example
+    static const mysql_str[] = "DELETE FROM promo_code WHERE name='%s' LIMIT 1";
+    new string[sizeof(mysql_str) + PC_MAX_NAME_SIZE];
+
+    mysql_format(mysql, string, sizeof(string), mysql_str, name);
+    mysql_tquery(mysql, string);
+    return 1;
+}
 ```
 
 ## Callbacks
