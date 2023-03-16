@@ -31,7 +31,7 @@ Include in your code and begin using the library:
 ```
 
 ## Callbacks
-#### public OnPlayerPromoCodeActivation(playerid, name[], promo_code_id, activation_count, remaining_activation_count)
+#### public OnPlayerPromoCodeActivation(playerid, const name[], promo_code_id, activation_count, remaining_activation_count)
 > Вызывается при активации промокода
 > * `name[]` - название промокода
 > * `promo_code_id` - ID промокода
@@ -40,7 +40,7 @@ Include in your code and begin using the library:
 > * **ПРИМЕЧАНИЕ: Всегда используйте в конце 'return 0;', если промокод активирован**
 
 
-#### public OnPlayerPromoCodeCreate(playerid, name[], remaining_activation_count, expiration_date, category_names[], category_value[])
+#### public OnPlayerPromoCodeCreate(playerid, const name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
 > Вызывается при создании промокода
 > * `name[]` - название промокода
 > * `remaining_activation_count` - число, сколько осталось активаций **(Вернет: -1 если бесконечно)**
@@ -49,7 +49,7 @@ Include in your code and begin using the library:
 > * `category_value[]` - значения категорий
 
 
-#### public OnPlayerPromoCodeEdit(playerid, old_name[], new_name[], remaining_activation_count, expiration_date, category_names[], category_value[])
+#### public OnPlayerPromoCodeEdit(playerid, const old_name[], const new_name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
 > Вызывается при редактирование промокода
 > * `old_name[]` - старое название промокода
 > * `new_name[]` - новое название промокода
@@ -59,7 +59,7 @@ Include in your code and begin using the library:
 > * `category_value[]` - значения категорий
 
 
-#### public OnPlayerPromoCodeDelete(playerid, name[], promo_code_id)
+#### public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 > Вызывается при удалении промокода
 > * `name[]` - название промокода
 > * `promo_code_id` - ID промокода
