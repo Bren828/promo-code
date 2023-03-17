@@ -162,7 +162,7 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 > Загрузить промокод
 > * `name[]` - название промокода
 > * `activation_count` - число, сколько было активаций
-> * `remainin_activation_count` - число, сколько осталось активаций **(Вернет: -1 если бесконечно)**
+> * `remainin_activation_count` - число, сколько осталось активаций **(используйте значение -1 для бесконечно количества активаций)**
 > * `expiration_date` - срок действия промокода `gettime()`
 > * `category_names[]` - названия категорий  
 > * `category_values[]` - значения категорий
