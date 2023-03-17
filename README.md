@@ -35,8 +35,8 @@ public OnGameModeInit()
 }
 
 
-forward OnPlayerPromoCodeActivation(playerid, name[], promo_code_id, activation_count, remaining_activation_count);
-public OnPlayerPromoCodeActivation(playerid, name[], promo_code_id, activation_count, remaining_activation_count)
+forward OnPlayerPromoCodeActivation(playerid, const name[], promo_code_id, activation_count, remaining_activation_count);
+public OnPlayerPromoCodeActivation(playerid, const name[], promo_code_id, activation_count, remaining_activation_count)
 {
     new category_value;
     if(GetPromoCodeCategoryName(promo_code_id, "Skill TEC9", category_value))
