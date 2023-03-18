@@ -211,13 +211,13 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 
 ## Definition
 ```pawn
-#define PC_MAX_PROMO_CODE                       200 // максимальное количество промокодов
+#define PC_MAX_PROMO_CODE                       300 // максимальное количество промокодов
 
 #define PC_MAX_NAME_SIZE                        32 // максимальная длина названия промокода
 
 #define PC_MAX_CATEGORY                         100 // максимальное количество категорий для промокодов
 
-#define PC_MAX_CATEGORY_IN_PROMO_CODE           50 // максимальное количество категорий в одном промокоде
+#define PC_MAX_CATEGORY_IN_PROMO_CODE           40 // максимальное количество категорий в одном промокоде
 
 #define PC_MAX_CATEGORY_NAME_SIZE               30 // максимальная длина названия категорий промокода
 
