@@ -112,15 +112,15 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 > Вызывается при активации промокода
 > * `name[]` - название промокода
 > * `promo_code_id` - ID промокода
-> * `activation_count` - число, сколько было активаций
-> * `remaining_activation_count` - число, сколько осталось активаций **(Вернет: -1 если бесконечно)**
+> * `activation_count` - число сколько было активаций
+> * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
 > * **ПРИМЕЧАНИЕ: Всегда используйте в конце 'return 0;', если промокод активирован**
 
 
 #### public OnPlayerPromoCodeCreate(playerid, const name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
 > Вызывается при создании промокода
 > * `name[]` - название промокода
-> * `remaining_activation_count` - число, сколько осталось активаций **(Вернет: -1 если бесконечно)**
+> * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
 > * `expiration_date` - срок действия промокода `gettime()`
 > * `category_names[]` - названия категорий
 > * `category_value[]` - значения категорий
@@ -130,7 +130,7 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 > Вызывается при редактирование промокода
 > * `old_name[]` - старое название промокода
 > * `new_name[]` - новое название промокода
-> * `remaining_activation_count` - число, сколько осталось активаций **(Вернет: -1 если бесконечно)**
+> * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
 > * `expiration_date` - срок действия промокода `gettime()`
 > * `category_names[]` - названия категорий
 > * `category_value[]` - значения категорий
@@ -161,8 +161,8 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 #### PromoCodeLoad(const name[], activation_count, remainin_activation_count, expiration_date, const category_names[], const category_values[])
 > Загрузить промокод
 > * `name[]` - название промокода
-> * `activation_count` - число, сколько было активаций
-> * `remainin_activation_count` - число, сколько осталось активаций **(используйте значение -1 для бесконечно количества активаций)**
+> * `activation_count` - число сколько было активаций
+> * `remainin_activation_count` - число сколько осталось активаций **(используйте значение -1 для бесконечно количества активаций)**
 > * `expiration_date` - срок действия промокода `gettime()`
 > * `category_names[]` - названия категорий  
 > * `category_values[]` - значения категорий
@@ -215,11 +215,11 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 
 #define PC_MAX_NAME_SIZE                        32 // максимальная длина названия промокода
 
-#define PC_MAX_CATEGORY                         100 // максимальное количество категории для промокодов
+#define PC_MAX_CATEGORY                         100 // максимальное количество категорий для промокодов
 
-#define PC_MAX_CATEGORY_IN_PROMO_CODE           50 // максимальное количество категории в одном промокоде
+#define PC_MAX_CATEGORY_IN_PROMO_CODE           50 // максимальное количество категорий в одном промокоде
 
-#define PC_MAX_CATEGORY_NAME_SIZE               30 // максимальная длина названия категории промокода
+#define PC_MAX_CATEGORY_NAME_SIZE               30 // максимальная длина названия категорий промокода
 
 #define PC_MAX_DIALOG_LISTITEM_SIZE             20 // количество строк в диалоге, после которых отображается кнопка 'Дальше'
 
