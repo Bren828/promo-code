@@ -110,8 +110,8 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 ## Callbacks
 #### public OnPlayerPromoCodeActivation(playerid, const name[], promo_code_id, activation_count, remaining_activation_count)
 > Вызывается при активации промокода
-> * `name[]` - название промокода
-> * `promo_code_id` - ID промокода
+> * `name[]` - Promo code name
+> * `promo_code_id` - The ID of the code name
 > * `activation_count` - число сколько было активаций
 > * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
 > * **ПРИМЕЧАНИЕ: Всегда используйте в конце 'return 0;', если промокод активирован**
@@ -119,7 +119,7 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 
 #### public OnPlayerPromoCodeCreate(playerid, const name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
 > Вызывается при создании промокода
-> * `name[]` - название промокода
+> * `name[]` - Promo code name
 > * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
 > * `expiration_date` - срок действия промокода `gettime()`
 > * `category_names[]` - названия категорий
@@ -138,8 +138,8 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 
 #### public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 > Вызывается при удалении промокода
-> * `name[]` - название промокода
-> * `promo_code_id` - ID промокода
+> * `name[]` - Promo code name
+> * `promo_code_id` - The ID of the code name
 
 ## Functions
 
@@ -153,13 +153,13 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 
 #### PromoCodeCategoryCreate(const name[])
 > Создать категорию промокода   
-> * `name[]` - название категории
+> * `name[]` - Category name
 > * Вернет (0) при неудачи или (1) при успехе
 
 
 #### PromoCodeLoad(const name[], activation_count, remainin_activation_count, expiration_date, const category_names[], const category_values[])
 > Загрузить промокод
-> * `name[]` - название промокода
+> * `name[]` - Promo code name
 > * `activation_count` - число сколько было активаций
 > * `remainin_activation_count` - число сколько осталось активаций **(используйте значение -1 для бесконечно количества активаций)**
 > * `expiration_date` - срок действия промокода `gettime()`
@@ -170,27 +170,27 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 
 #### PromoCodeDelete(const name[])
 > Удалить промокод
-> * `name[]` - название промокода
+> * `name[]` - Promo code name
 > * `bool:callback` - вызывать **'OnPlayerPromoCodeDelete'** при удаление 
 > * Вернет (0) при неудачи или (ID) созданного промокода
 
 
 #### IsPromoCodeCreate(const name[])
 > Проверить промокод на создание
-> * `name[]` - название промокода
+> * `name[]` - Promo code name
 > * Вернет (0) при неудачи или (1) при успехе
 
 
 #### PromoCodeActivation(playerid, const name[], &errorid = 0)
 > Активировать промокод
-> * `name[]` - название промокода
+> * `name[]` - Promo code name
 > * `errorid` - вернет номер ошибки **(PROMO_CODE_ACTIVATIONS_ENDED (2) || PROMO_CODE_EXPIRED (3))**
 > * Вернет (0) при неудачи или (1) при успехе
 
 
 #### GetPromoCodeCategoryName(promo_code_id, const find_category[], &category_value = 0)
 > Проверить промокод на определенную категорию
-> * `promo_code_id` - ID промокода
+> * `promo_code_id` - The ID of the code name
 > * `find_category[]` - название категории для поиска
 > * `&category_value` - возвращает значение категории
 > * Вернет (0) при неудачи или (1) при успехе
