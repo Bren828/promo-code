@@ -154,8 +154,7 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 #### PromoCodeCategoryCreate(const name[])
 > Создать категорию промокода   
 > * `name[]` - название категории
-> * Вернет: 0 при неудачи
-> * Вернет: 1 при успехе
+> * Вернет (0) при неудачи или (1) при успехе
 
 
 #### PromoCodeLoad(const name[], activation_count, remainin_activation_count, expiration_date, const category_names[], const category_values[])
@@ -166,31 +165,27 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 > * `expiration_date` - срок действия промокода `gettime()`
 > * `category_names[]` - названия категорий  
 > * `category_values[]` - значения категорий
-> * Вернет: 0 при неудачи
-> * Вернет: ID созданного промокода
+> * Вернет (0) при неудачи или (ID) созданного промокода
 
 
 #### PromoCodeDelete(const name[])
 > Удалить промокод
 > * `name[]` - название промокода
 > * `bool:callback` - вызывать **'OnPlayerPromoCodeDelete'** при удаление 
-> * Вернет: 0 при неудачи
-> * Вернет: ID созданного промокода
+> * Вернет (0) при неудачи или (ID) созданного промокода
 
 
 #### IsPromoCodeCreate(const name[])
 > Проверить промокод на создание
 > * `name[]` - название промокода
-> * Вернет: 0 при неудачи
-> * Вернет: 1 при успехе
+> * Вернет (0) при неудачи или (1) при успехе
 
 
 #### PromoCodeActivation(playerid, const name[], &errorid = 0)
 > Активировать промокод
 > * `name[]` - название промокода
 > * `errorid` - вернет номер ошибки **(PROMO_CODE_ACTIVATIONS_ENDED (2) || PROMO_CODE_EXPIRED (3))**
-> * Вернет: 0 при неудачи
-> * Вернет: 1 при успехе
+> * Вернет (0) при неудачи или (1) при успехе
 
 
 #### GetPromoCodeCategoryName(promo_code_id, const find_category[], &category_value = 0)
@@ -198,16 +193,14 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 > * `promo_code_id` - ID промокода
 > * `find_category[]` - название категории для поиска
 > * `&category_value` - возвращает значение категории
-> * Вернет: 0 при неудачи
-> * Вернет: 1 при успехе
+> * Вернет (0) при неудачи или (1) при успехе
 
 
 #### GetPromoCodeCompare(const name1[], const name2[])
 > Сравнить первое название промокода со вторым названием промокода **( аналог функции strcmp )**
 > * `name1[]` - первое название промокода для сравнения
 > * `name2[]` - второе название промокода для сравнения
-> * Вернет: 0 при неудачи
-> * Вернет: 1 при успехе
+> * Вернет (0) при неудачи или (1) при успехе
 
 ## Definition
 ```pawn
