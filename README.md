@@ -1,7 +1,5 @@
-Language: **English** or [Russian](https://github.com/Bren828/promo-code/blob/main/README.md)
-
 # promo-code
-Создание промокодов с разными категориями, скором действия и определенным количеством активаций в SAMP
+Creating promo codes with categories in SAMP
 
 ![Crosshair](https://raw.githubusercontent.com/Bren828/promo-code/main/preview.gif)
 
@@ -109,112 +107,112 @@ public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 
 ## Callbacks
 #### public OnPlayerPromoCodeActivation(playerid, const name[], promo_code_id, activation_count, remaining_activation_count)
-> Вызывается при активации промокода
+> Called when the promo code is activated
 > * `name[]` - Promo code name
 > * `promo_code_id` - The ID of the code name
-> * `activation_count` - число сколько было активаций
-> * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
-> * **ПРИМЕЧАНИЕ: Всегда используйте в конце 'return 0;', если промокод активирован**
+> * `activation_count` - Number of activations
+> * `remaining_activation_count` - how many activations are left **(Returns: -1 if infinite)**
+> * **NOTE: Always use 'return 0;' at the end if the promo code is activated**
 
 
 #### public OnPlayerPromoCodeCreate(playerid, const name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
-> Вызывается при создании промокода
+> Called when creating a promo code
 > * `name[]` - Promo code name
-> * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
-> * `expiration_date` - срок действия промокода `gettime()`
-> * `category_names[]` - названия категорий
-> * `category_value[]` - значения категорий
+> * `remaining_activation_count` - number of activations left **(Return: -1 if infinite)**
+> * `expiration_date` -  validity period `gettime()`
+> * `category_names[]` - category names
+> * `category_value[]` - category values
 
 
 #### public OnPlayerPromoCodeEdit(playerid, const old_name[], const new_name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
-> Вызывается при редактирование промокода
-> * `old_name[]` - старое название промокода
-> * `new_name[]` - новое название промокода
-> * `remaining_activation_count` - число сколько осталось активаций **(Вернет: -1 если бесконечно)**
-> * `expiration_date` - срок действия промокода `gettime()`
-> * `category_names[]` - названия категорий
-> * `category_value[]` - значения категорий
+> Called when editing a promo code
+> * `old_name[]` - old promo code name
+> * `new_name[]` - new promo code name
+> * `remaining_activation_count` - number of activations left **(Return: -1 if infinite)**
+> * `expiration_date` - validity period `gettime()`
+> * `category_names[]` - category names
+> * `category_value[]` - category values
 
 
 #### public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
-> Вызывается при удалении промокода
+> Called when the promo code is deleted
 > * `name[]` - Promo code name
 > * `promo_code_id` - The ID of the code name
 
 ## Functions
 
 #### PromoCodeCreate(playerid)
-> Открывает диалог с созданием промокода
+> Create a promo code
  
 
 #### PromoCodeList(playerid)
-> Открывает диалог с списком созданных промокодов
+> List of promo codes
 
 
 #### PromoCodeCategoryCreate(const name[])
-> Создать категорию промокода   
+> Create a promo code category
 > * `name[]` - Category name
-> * Вернет (0) при неудачи или (1) при успехе
+> * Returns (0) on failure or (1) on success
 
 
 #### PromoCodeLoad(const name[], activation_count, remainin_activation_count, expiration_date, const category_names[], const category_values[])
-> Загрузить промокод
+> Load promo code
 > * `name[]` - Promo code name
-> * `activation_count` - число сколько было активаций
-> * `remainin_activation_count` - число сколько осталось активаций **(используйте значение -1 для бесконечно количества активаций)**
-> * `expiration_date` - срок действия промокода `gettime()`
-> * `category_names[]` - названия категорий  
-> * `category_values[]` - значения категорий
-> * Вернет (0) при неудачи или (ID) созданного промокода
+> * `activation_count` - how many activations
+> * `remainin_activation_count` - number of activations left **(Return: -1 if infinite)**
+> * `expiration_date` - validity period `gettime()`
+> * `category_names[]` - category names
+> * `category_values[]` - category values
+> * Returns (0) on failure or promo code id
 
 
 #### PromoCodeDelete(const name[])
-> Удалить промокод
+> Delete promo code
 > * `name[]` - Promo code name
-> * `bool:callback` - вызывать **'OnPlayerPromoCodeDelete'** при удаление 
-> * Вернет (0) при неудачи или (ID) созданного промокода
+> * `bool:callback` - call **'OnPlayerPromoCodeDelete'** on delete
+> * Returns (0) on failure or promo code id
 
 
 #### IsPromoCodeCreate(const name[])
-> Проверить промокод на создание
+> Check the promo code for creation
 > * `name[]` - Promo code name
-> * Вернет (0) при неудачи или (1) при успехе
+> * Returns (0) on failure or (1) on success
 
 
 #### PromoCodeActivation(playerid, const name[], &errorid = 0)
-> Активировать промокод
+> Activate a promo code
 > * `name[]` - Promo code name
-> * `errorid` - вернет номер ошибки **(PROMO_CODE_ACTIVATIONS_ENDED (2) || PROMO_CODE_EXPIRED (3))**
-> * Вернет (0) при неудачи или (1) при успехе
+> * `errorid` - error number **(PROMO_CODE_ACTIVATIONS_ENDED (2) || PROMO_CODE_EXPIRED (3))**
+> * Returns (0) on failure or (1) on success
 
 
 #### GetPromoCodeCategoryName(promo_code_id, const find_category[], &category_value = 0)
-> Проверить промокод на определенную категорию
+> Check a promo code for a certain category
 > * `promo_code_id` - The ID of the code name
-> * `find_category[]` - название категории для поиска
-> * `&category_value` - возвращает значение категории
-> * Вернет (0) при неудачи или (1) при успехе
+> * `find_category[]` - name of the category to search for
+> * `&category_value` - returns the category value
+> * Returns (0) on failure or (1) on success
 
 
 #### GetPromoCodeCompare(const name1[], const name2[])
-> Сравнить первое название промокода со вторым названием промокода **( аналог функции strcmp )**
-> * `name1[]` - первое название промокода для сравнения
-> * `name2[]` - второе название промокода для сравнения
-> * Вернет (0) при неудачи или (1) при успехе
+> Compare the promo code name **( function analogue strcmp )**
+> * `name1[]` - first name
+> * `name2[]` - second name
+> * Returns (0) on failure or (1) on success
 
 ## Definition
 ```pawn
-#define PC_MAX_PROMO_CODE                       300 // максимальное количество промокодов
+#define PC_MAX_PROMO_CODE                       300
 
-#define PC_MAX_NAME_SIZE                        32 // максимальная длина названия промокода
+#define PC_MAX_NAME_SIZE                        32
 
-#define PC_MAX_CATEGORY                         100 // максимальное количество категорий для промокодов
+#define PC_MAX_CATEGORY                         100
 
-#define PC_MAX_CATEGORY_IN_PROMO_CODE           40 // максимальное количество категорий в одном промокоде
+#define PC_MAX_CATEGORY_IN_PROMO_CODE           40
 
-#define PC_MAX_CATEGORY_NAME_SIZE               30 // максимальная длина названия категорий промокода
+#define PC_MAX_CATEGORY_NAME_SIZE               30
 
-#define PC_MAX_DIALOG_LISTITEM_SIZE             20 // количество строк в диалоге, после которых отображается кнопка 'Дальше'
+#define PC_MAX_DIALOG_LISTITEM_SIZE             20 // max dialog list lines
 
 #define PC_COLOR_1                              "{F5D742}" // 0xF5D742
 
