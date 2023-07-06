@@ -4,16 +4,12 @@ Creating promo codes with categories in SAMP
 ![Crosshair](https://raw.githubusercontent.com/Bren828/promo-code/main/preview.gif)
 
 ## Reference
-* [Download](https://github.com/Bren828/promo-code#download)
 * [Installation](https://github.com/Bren828/promo-code#installation)
 * [Example](https://github.com/Bren828/promo-code#example)
 * [Callbacks](https://github.com/Bren828/promo-code#callbacks)
 * [Functions](https://github.com/Bren828/promo-code#functions)
 * [Definition](https://github.com/Bren828/promo-code#definition)
 * [Enum](https://github.com/Bren828/promo-code#enum)
-
-## Download
-[Releases page](https://github.com/Bren828/promo-code/releases)
 
 ## Installation
 
