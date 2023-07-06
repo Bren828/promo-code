@@ -5,9 +5,9 @@
 *   ---------------------------------------------------
 *
 *	Creater - @Bren828 					
-*									16 March 2023
+*									6 July 2023
 *
-*   Version: 1.0
+*   Version: 1.1
 *
 *   ---------------------------------------------------
 *
@@ -16,115 +16,108 @@
 *
 *
 *
-* Открывает диалог с созданием промокода
+* Create a promo code
 *      PromoCodeCreate(playerid)
 *
 *
-* Открывает диалог с списком созданных промокодов
+* List of promo codes
 *      PromoCodeList(playerid)
 *
 *
-* Создать категорию промокода   
+* Create a promo code category
 *       PromoCodeCategoryCreate(const name[])
 *     
-*       * name[]: название категории
-*       * Вернет: 0 при неудачи
-*       * Вернет: 1 при успехе
+*       * name[]: Category name
+*       * Returns (0) on failure or (1) on success
 *
 *
-* Загрузить промокод
+* Load promo code
 *       PromoCodeLoad(const name[], activation_count, remaining_activation_count, expiration_date, const category_names[], const category_values[])
-*       * name[]: название промокода
-*       * activation_count: число, сколько было активаций
-*       * remaining_activation_count: число, сколько осталось активаций (Вернет: -1 если бесконечно)
-*       * expiration_date: срок действия промокода ( gettime() )
-*       * category_names[]: названия категорий  
-*       * category_values[]: значения категорий
-*       * Вернет: 0 при неудачи
-*       * Вернет: ID созданного промокода
+*       * name[]: Promo code name
+*       * activation_count: how many activations
+*       * remaining_activation_count: number of activations left (Return: -1 if infinite)
+*       * expiration_date: validity period ( gettime() )
+*       * category_names[]: category names
+*       * category_values[]: category values
+*       * Returns (0) on failure or promo code id
 *  
 *
-* Удалить промокод
+* Delete promo code
 *       PromoCodeDelete(const name[])
 *     
-*       * name[]: название промокода
-*       * bool:callback: вызывать 'OnPlayerPromoCodeDelete' при удаление 
-*       * Вернет: 0 при неудачи
-*       * Вернет: ID созданного промокода
+*       * name[]: Promo code name
+*       * bool:callback: call 'OnPlayerPromoCodeDelete' on delete
+*       * Returns (0) on failure or promo code id
 *
 *
-* Проверить промокод на создание
+* Check the promo code for creation
 *       IsPromoCodeCreate(const name[])
 *     
-*       * name[]: название промокода
-*       * Вернет: 0 при неудачи
-*       * Вернет: 1 при успехе
+*       * name[]: Promo code name
+*       * Returns (0) on failure or (1) on success
 *
 *
-* Активировать промокод
+* Activate a promo code
 *       PromoCodeActivation(playerid, const name[], &errorid = 0)
 *     
-*       * name[]: название промокода
-*       * errorid: вернет номер ошибки (PROMO_CODE_ACTIVATIONS_ENDED (2) || PROMO_CODE_EXPIRED (3))
-*       * Вернет: 0 при неудачи
-*       * Вернет: 1 при успехе
+*       * name[]: Promo code name
+*       * errorid: error number (PROMO_CODE_ACTIVATIONS_ENDED (2) || PROMO_CODE_EXPIRED (3))
+*       * Returns (0) on failure or (1) on success
 *     
 *
-* Проверить промокод на определенную категорию
+* Check a promo code for a certain category
 *       GetPromoCodeCategoryName(promo_code_id, const find_category[], &category_value = 0)
 * 
-*       * promo_code_id: ID промокода
-*       * find_category[]: название категории для поиска
-*       * &category_value: возвращает значение категории
-*       * Вернет: 0 при неудачи
-*       * Вернет: 1 при успехе
+*       * promo_code_id: The ID of the code name
+*       * find_category[]: name of the category to search for
+*       * &category_value: returns the category value
+*       * Returns (0) on failure or (1) on success
 *
 *
-* Сравнить первое название промокода со вторым названием промокода ( аналог функции strcmp )
+* Compare the promo code name ( function analogue strcmp )
 *       GetPromoCodeCompare(const name1[], const name2[])
 *     
-*       * name1[]: первое название промокода для сравнения
-*       * name2[]: второе название промокода для сравнения
-*       * Вернет: 0 при неудачи
-*       * Вернет: 1 при успехе
+*       * name1[]: first name
+*       * name2[]: second name
+*       * Returns (0) on failure or (1) on success
 * 
 *  
-* Вызывается при активации промокода
+* Called when the promo code is activated
 *       public OnPlayerPromoCodeActivation(playerid, const name[], promo_code_id, activation_count, remaining_activation_count)
 *
-*       * name[]: название промокода
-*       * promo_code_id: ID промокода
-*       * activation_count: число, сколько было активаций
-*       * remaining_activation_count: число, сколько осталось активаций (Вернет: -1 если бесконечно)
-*       * ПРИМЕЧАНИЕ: Всегда используйте в конце 'return 0;', если промокод активирован
+*       * name[]: Promo code name
+*       * promo_code_id:  The ID of the code name
+*       * activation_count: Number of activations
+*       * remaining_activation_count: how many activations are left (Returns: -1 if infinite)
+*       * NOTE: Always use 'return 0;' at the end if the promo code is activated
 * 
 *
-* Вызывается при создании промокода
+* Called when creating a promo code
 *       public OnPlayerPromoCodeCreate(playerid, const name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
 *     
-*       * name[]: название промокода
-*       * remaining_activation_count: число, сколько осталось активаций (Вернет: -1 если бесконечно)
-*       * expiration_date: срок действия промокода ( gettime() )
-*       * category_names[]: названия категорий
-*       * category_value[]: значения категорий
+*       * name[]: Promo code name
+*       * remaining_activation_count: number of activations left (Return: -1 if infinite)
+*       * expiration_date: validity period ( gettime() )
+*       * category_names[]: category names
+*       * category_value[]: category values
 * 
 *
-* Вызывается при редактирование промокода
+* Called when editing a promo code
 *       public OnPlayerPromoCodeEdit(playerid, const old_name[], const new_name[], remaining_activation_count, expiration_date, const category_names[], const category_value[])
 *     
-*       * old_name[]: старое название промокода
-*       * new_name[]: новое название промокода
-*       * remaining_activation_count: число, сколько осталось активаций (Вернет: -1 если бесконечно)
-*       * expiration_date: срок действия промокода ( gettime() )
-*       * category_names[]: названия категорий
-*       * category_value[]: значения категорий
+*       * old_name[]: old promo code name
+*       * new_name[]: new promo code name
+*       * remaining_activation_count: number of activations left (Return: -1 if infinite)
+*       * expiration_date: validity period ( gettime() )
+*       * category_names[]: category names
+*       * category_value[]: category values
 * 
 *
-* Вызывается при удалении промокода
+* Called when the promo code is deleted
 *       public OnPlayerPromoCodeDelete(playerid, const name[], promo_code_id)
 *     
-*       * name[]: название промокода
-*       * promo_code_id: ID промокода
+*       * name[]: Promo code name
+*       * promo_code_id: The ID of the code name
 * 
 * 
 */
@@ -136,27 +129,27 @@
 
 
 #if !defined PC_MAX_PROMO_CODE
-	#define PC_MAX_PROMO_CODE                       300 // максимальное количество промокодов
+	#define PC_MAX_PROMO_CODE                       300
 #endif
 
 #if !defined PC_MAX_NAME_SIZE
-	#define PC_MAX_NAME_SIZE                        32 // максимальная длина названия промокода
+	#define PC_MAX_NAME_SIZE                        32
 #endif
 
 #if !defined PC_MAX_CATEGORY
-	#define PC_MAX_CATEGORY                         100 // максимальное количество категорий для промокодов
+	#define PC_MAX_CATEGORY                         100
 #endif
 
 #if !defined PC_MAX_CATEGORY_IN_PROMO_CODE
-	#define PC_MAX_CATEGORY_IN_PROMO_CODE           40 // максимальное количество категорий в одном промокоде
+	#define PC_MAX_CATEGORY_IN_PROMO_CODE           40
 #endif
 
 #if !defined PC_MAX_CATEGORY_NAME_SIZE
-	#define PC_MAX_CATEGORY_NAME_SIZE               30 // максимальная длина названия категорий промокода
+	#define PC_MAX_CATEGORY_NAME_SIZE               30
 #endif
 
 #if !defined PC_MAX_DIALOG_LISTITEM_SIZE
-    #define PC_MAX_DIALOG_LISTITEM_SIZE             20 // количество строк в диалоге, после которых отображается кнопка 'Дальше'
+    #define PC_MAX_DIALOG_LISTITEM_SIZE             20 // max dialog list lines
 #endif
 
 #if !defined PC_COLOR_1
@@ -371,8 +364,8 @@ stock PromoCodeCreate(playerid)
     {
         if(x < PC_MAX_CATEGORY)
         {
-            promo_code_player[playerid][pcp_CategoryID][x] = x;
-            promo_code_player[playerid][pcp_CategoryValues][x] = 1000000989;
+            promo_code_player[playerid][pcp_CategoryID][x] = -1;
+            promo_code_player[playerid][pcp_CategoryValues][x] = 0;
         }
         promo_code_player[playerid][pcp_CategoryUsed][x] = false;
     }
@@ -385,32 +378,50 @@ stock PromoCodeCreate(playerid)
 
 DialogCreate:_promo_code_Create(playerid)
 {
-    new string[208+PC_MAX_NAME_SIZE+14+31 + (PC_MAX_CATEGORY_NAME_SIZE+10+18)*PC_MAX_DIALOG_LISTITEM_SIZE ], activation[14] = "Бесконечно", expiration_date[31] = "Бессрочный", caption[55+10] = "Создание промокода";
+    new string[208+PC_MAX_NAME_SIZE+14+31 + (PC_MAX_CATEGORY_NAME_SIZE+10+18)*PC_MAX_DIALOG_LISTITEM_SIZE ], 
+        activation[14] = "Eternal", 
+        expiration_date[31] = "Eternal", 
+        caption[55+10] = "Create a promo code"
+    ;
     for(new x; x < PC_MAX_DIALOG_LISTITEM_SIZE; x ++) promo_code_player[playerid][pcp_DialogListitemIDs][x] = -1;
     
+
     if(promo_code_player[playerid][pcp_RemainingActivationCount] != -1) 
     {
-        if(promo_code_player[playerid][pcp_EditPromoCode][0] == false || promo_code_player[playerid][pcp_RemainingActivationCount] >= 1) format(activation, sizeof(activation), "%d", promo_code_player[playerid][pcp_RemainingActivationCount]);
-        else format(activation, sizeof(activation), "Закончились");
+        if(promo_code_player[playerid][pcp_EditPromoCode][0] == false || promo_code_player[playerid][pcp_RemainingActivationCount] >= 1) 
+        {
+            format(activation, sizeof(activation), "%d", promo_code_player[playerid][pcp_RemainingActivationCount]);
+        }
+        else format(activation, sizeof(activation), "Expired");
     }
     if(promo_code_player[playerid][pcp_ExpirationDate] != 0) 
     {
-        if(promo_code_player[playerid][pcp_EditPromoCode][0] == false || promo_code_player[playerid][pcp_EditPromoCode][0] == true && promo_code[promo_code_player[playerid][pcp_ListSlotID]][pc_ExpirationDate] != promo_code_player[playerid][pcp_ExpirationDate]) format(expiration_date, sizeof(expiration_date), "%d дней(я)", promo_code_player[playerid][pcp_ExpirationDate]);
+        if(promo_code_player[playerid][pcp_EditPromoCode][0] == false || promo_code_player[playerid][pcp_EditPromoCode][0] == true && promo_code[promo_code_player[playerid][pcp_ListSlotID]][pc_ExpirationDate] != promo_code_player[playerid][pcp_ExpirationDate]) 
+        {
+            format(expiration_date, sizeof(expiration_date), "%d days", promo_code_player[playerid][pcp_ExpirationDate]);
+        }
         else 
         {
-            if(promo_code_player[playerid][pcp_ExpirationDate] != 0 && promo_code_player[playerid][pcp_ExpirationDate] <= gettime()) format(expiration_date, sizeof(expiration_date), "Истек");
-            else format(expiration_date, sizeof(expiration_date), "осталось %s", _promo_code_convert(promo_code_player[playerid][pcp_ExpirationDate]- gettime()) );
+            if(promo_code_player[playerid][pcp_ExpirationDate] != 0 && promo_code_player[playerid][pcp_ExpirationDate] <= gettime()) 
+            {
+                format(expiration_date, sizeof(expiration_date), "Expired");
+            }
+            else 
+            {
+                format(expiration_date, sizeof(expiration_date), "left %s", _promo_code_convert(promo_code_player[playerid][pcp_ExpirationDate]- gettime()) );
+            }
         }
     }
     format(string, sizeof(string),
         "%s\t\n\
-        Название промокода\t"PC_COLOR_1"%s\n\
-        Количество активаций\t"PC_COLOR_1"%s\n\
-        Срок действия\t"PC_COLOR_1"%s\n\
+        Name\t"PC_COLOR_1"%s\n\
+        Number of activations\t"PC_COLOR_1"%s\n\
+        Validity period\t"PC_COLOR_1"%s\n\
         {000000}\n\
-        Добавить категорию\t\n\
-        "PC_COLOR_1"Содержит категории\t"PC_COLOR_1"Количество:\n",
-    (promo_code_player[playerid][pcp_EditPromoCode][0] == false) ? (""PC_COLOR_2"Создать промокод"):(""PC_COLOR_3"Удалить промокод"),
+        Add category\t\n\
+        "PC_COLOR_1"Contains categories\t"PC_COLOR_1"Quantity:\n",
+
+    (promo_code_player[playerid][pcp_EditPromoCode][0] == false) ? (""PC_COLOR_2"Create a promo code"):(""PC_COLOR_3"Delete a promo code"),
     promo_code_player[playerid][pcp_Name],
     activation,
     expiration_date);
@@ -434,36 +445,37 @@ DialogCreate:_promo_code_Create(playerid)
         if(line_max >= PC_MAX_DIALOG_LISTITEM_SIZE+1)
         {
             block_back_button = 2;
-            strcat(string, "> Дальше\n");
-            if(promo_code_player[playerid][pcp_Page] >= 1) strcat(string, "< Назад\n");
+            strcat(string, "> Further\n");
+            if(promo_code_player[playerid][pcp_Page] >= 1) strcat(string, "< Back\n");
             break;
         }
     }
     if(promo_code_player[playerid][pcp_Page] >= 1 && block_back_button == 0 || block_back_button == 1)
     {
-        strcat(string, "< Назад\n");
+        strcat(string, "< Back\n");
         promo_code_player[playerid][pcp_PageBackButton] = line_max + ((block_back_button == 0) ? (1):(2));
     }
 
-    if(promo_code_player[playerid][pcp_EditPromoCode][0] == true) format(caption, sizeof(caption), "Редактирование промокода | "PC_COLOR_1"Кол-во активаций: %d", promo_code[ promo_code_player[playerid][pcp_ListSlotID] ][pc_ActivationCount]);
-    Dialog_Open(playerid, Dialog:_promo_code_Create, DIALOG_STYLE_TABLIST, caption, string, "Выбрать", (promo_code_player[playerid][pcp_EditPromoCode][0] == false) ? ("Отмена"):("Назад"));
+    if(promo_code_player[playerid][pcp_EditPromoCode][0] == true) format(caption, sizeof(caption), "Editing a promo code | "PC_COLOR_1"Activations: %d", promo_code[ promo_code_player[playerid][pcp_ListSlotID] ][pc_ActivationCount]);
+    
+    Dialog_Open(playerid, Dialog:_promo_code_Create, DIALOG_STYLE_TABLIST, caption, string, "Select", (promo_code_player[playerid][pcp_EditPromoCode][0] == false) ? ("Cancel"):("Back"));
     return 1;
 }
 
-stock _promo_code_convert(number)
+static stock _promo_code_convert(number)
 {
-	new string[30], timers[3];
+	new string[35], timers[3];
     timers[0] = floatround(number/3600);
 	if(timers[0] <= 23)
 	{
         timers[1] = floatround((number/60)-(timers[0]*60));
         timers[2] = floatround(number-((timers[0]*3600)+(timers[1]*60)));
 
-        if(timers[0] < 0 || timers[0] >= 1) format(string, sizeof(string), "%02d часов %02d минут", timers[0], timers[1]);
-        else if(timers[1] >= 1) format(string, sizeof(string), "%02d минут %02d секунд", timers[1], timers[2]);
-        else format(string, sizeof(string), "%d секунд", timers[2]);
+        if(timers[0] < 0 || timers[0] >= 1) format(string, sizeof(string), "%02d hours %02d minutes", timers[0], timers[1]);
+        else if(timers[1] >= 1) format(string, sizeof(string), "%02d minutes %02d seconds", timers[1], timers[2]);
+        else format(string, sizeof(string), "%d seconds", timers[2]);
     }
-	else format(string, sizeof(string), "%d дней(я)", timers[0]/24);
+	else format(string, sizeof(string), "%d days", timers[0]/24);
 	return string;
 }
 
@@ -475,8 +487,8 @@ DialogResponse:_promo_code_Create(playerid, response, listitem, inputtext[])
         {
             if(promo_code_player[playerid][pcp_EditPromoCode][1] == true)
             {
-                Dialog_Open(playerid, Dialog:_promo_code_Savechanges, DIALOG_STYLE_MSGBOX, "Принятие изменений",  
-                    "{FFFFFF}Были найдены изменения желаете их сохранить ?", "Да", "Нет");
+                Dialog_Open(playerid, Dialog:_promo_code_Savechanges, DIALOG_STYLE_MSGBOX, "Accept changes",  
+                    "{FFFFFF}Save changes ?", "Yes", "No");
                 return 1;
             }
             Dialog_Show(playerid, Dialog:_promo_code_List);
@@ -490,14 +502,14 @@ DialogResponse:_promo_code_Create(playerid, response, listitem, inputtext[])
             if(promo_code_player[playerid][pcp_EditPromoCode][0] == true)
             {
                 new string[60+PC_MAX_NAME_SIZE];
-                format(string, sizeof(string), "{FFFFFF}Вы действительно желаете удалить промокод "PC_COLOR_1"%s", promo_code_player[playerid][pcp_Name]);
-                Dialog_Open(playerid, Dialog:_promo_code_Delete, DIALOG_STYLE_MSGBOX, "Удалить промокод", string, "Удалить", "Назад");
+                format(string, sizeof(string), "{FFFFFF}Remove promo code "PC_COLOR_1"%s", promo_code_player[playerid][pcp_Name]);
+                Dialog_Open(playerid, Dialog:_promo_code_Delete, DIALOG_STYLE_MSGBOX, "Delete a promo code", string, "Remove", "Back");
                 return 1;
             }
             if(IsPromoCodeCreate(promo_code_player[playerid][pcp_Name]))
             {
-                Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Создание промокода", 
-                    "{FFFFFF}Промокод с данным названием уже есть.", "Закрыть", "Назад");
+                Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Create a promo code", 
+                    "{FFFFFF}There is already a promo code with this name.", "Close", "Back");
                 return 1;
             }
             new category_names [(PC_MAX_CATEGORY_NAME_SIZE+1) * PC_MAX_CATEGORY_IN_PROMO_CODE],
@@ -514,24 +526,24 @@ DialogResponse:_promo_code_Create(playerid, response, listitem, inputtext[])
             }
             if(max_category == 0)
             {
-                Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Создание промокода", 
-                    "{FFFFFF}Промокод не может быть создан без категорий.", 
-                "Закрыть", "Назад");
+                Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Create a promo code", 
+                    "{FFFFFF}Select a category for the promo code.", 
+                "Close", "Back");
                 return 1;
             }
 
             new check = PromoCodeLoad(promo_code_player[playerid][pcp_Name], 0, promo_code_player[playerid][pcp_RemainingActivationCount], (promo_code_player[playerid][pcp_ExpirationDate] == 0) ? (0):(gettime() + (promo_code_player[playerid][pcp_ExpirationDate] * 86400)), category_names, category_values);
             if(!check)
             {
-                Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Создание промокода", 
-                    "{FFFFFF}Достигнут лимит по количеству созданих промокодов.", 
-                "Закрыть", "Назад");
+                Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Create a promo code", 
+                    "{FFFFFF}Promo code limit.", 
+                "Close", "Back");
                 return 1;
             }
 
-            new string[47+PC_MAX_NAME_SIZE];
-            format(string, sizeof(string), "{FFFFFF}Промокод "PC_COLOR_1"%s {FFFFFF}был создан.", promo_code_player[playerid][pcp_Name]);
-            Dialog_Message(playerid, "Создание промокода", string, "Закрыть");
+            new string[54+PC_MAX_NAME_SIZE];
+            format(string, sizeof(string), "{FFFFFF}Promo code "PC_COLOR_1"%s {FFFFFF}was created.", promo_code_player[playerid][pcp_Name]);
+            Dialog_Message(playerid, "Create a promo code", string, "Close");
 
             #if defined OnPlayerPromoCodeCreate
 		        OnPlayerPromoCodeCreate(playerid, promo_code_player[playerid][pcp_Name], promo_code_player[playerid][pcp_RemainingActivationCount], (promo_code_player[playerid][pcp_ExpirationDate] == 0) ? (0):(gettime() + (promo_code_player[playerid][pcp_ExpirationDate] * 86400)), category_names, category_values);
@@ -540,27 +552,27 @@ DialogResponse:_promo_code_Create(playerid, response, listitem, inputtext[])
         }
         case 1:
         {
-            Dialog_Open(playerid, Dialog:_promo_code_Name, DIALOG_STYLE_INPUT, "Название промокода", "{FFFFFF}Введите название промокода от 3 до "#PC_MAX_NAME_SIZE" символов:", "Дальше", "Назад");
+            Dialog_Open(playerid, Dialog:_promo_code_Name, DIALOG_STYLE_INPUT, "Promo code name", "{FFFFFF}Enter the name of the promo code from 3 to "#PC_MAX_NAME_SIZE" characters:", "Select", "Back");
             return 1;
         }
-        case 2://Количество активаци
+        case 2:
         {
-            Dialog_Open(playerid, Dialog:_promo_code_Activation, DIALOG_STYLE_INPUT, "Количество активаци", "{FFFFFF}Введите количество активаций промокода:\nИспользуйте число 0 для бесконечного количества активаций.", "Дальше", "Назад");
+            Dialog_Open(playerid, Dialog:_promo_code_Activation, DIALOG_STYLE_INPUT, "Number of activations", "{FFFFFF}Enter the number of activations:\nUse 0 for an eternal number of activations.", "Select", "Back");
             return 1;
         }
-        case 3://Срок действия
+        case 3:
         {
-            Dialog_Open(playerid, Dialog:_promo_code_ExpirationDate, DIALOG_STYLE_INPUT, "Срок действия", "{FFFFFF}Введите срок действия промокода в днях:\nИспользуйте число 0 для бесконечного срока действия.", "Дальше", "Назад");
+            Dialog_Open(playerid, Dialog:_promo_code_ExpirationDate, DIALOG_STYLE_INPUT, "Validity period", "{FFFFFF}Enter validity period in days:\nUse 0 for eternal", "Select", "Back");
             return 1;
         }
-        case 4: return Dialog_Show(playerid, Dialog:_promo_code_Create);//пропуск
-        case 5://Добавить категорию
+        case 4: return Dialog_Show(playerid, Dialog:_promo_code_Create);
+        case 5:
         {
             Dialog_Show(playerid, Dialog:_promo_code_SelectCategory);
             return 1;
         }
-        case 6: return Dialog_Show(playerid, Dialog:_promo_code_Create);//пропуск
-        case PC_MAX_DIALOG_LISTITEM_SIZE + 7://кнопка далее
+        case 6: return Dialog_Show(playerid, Dialog:_promo_code_Create);
+        case PC_MAX_DIALOG_LISTITEM_SIZE + 7:
         {
             if(promo_code_player[playerid][pcp_PageBackButton] >= 1 && promo_code_player[playerid][pcp_PageBackButton] == listitem-7 +1 && promo_code_player[playerid][pcp_Page] >= 1)
             {
@@ -572,7 +584,7 @@ DialogResponse:_promo_code_Create(playerid, response, listitem, inputtext[])
             Dialog_Show(playerid, Dialog:_promo_code_Create);
             return 1;
         }
-        case PC_MAX_DIALOG_LISTITEM_SIZE+ 7 + 1://кнопка назад
+        case PC_MAX_DIALOG_LISTITEM_SIZE+ 7 + 1:
         {
             if(promo_code_player[playerid][pcp_Page] >= 1)
             {
@@ -593,12 +605,12 @@ DialogResponse:_promo_code_Create(playerid, response, listitem, inputtext[])
             new slot = promo_code_player[playerid][pcp_DialogListitemIDs][listitem-7];
             promo_code_player[playerid][pcp_DialogListitem] = slot;
 
-            new string[112+PC_MAX_CATEGORY_NAME_SIZE];
+            new string[102+PC_MAX_CATEGORY_NAME_SIZE];
             format(string, sizeof(string), 
-                "{FFFFFF}Введите значение категории "PC_COLOR_1"%s{FFFFFF}:\n\
-                Используйте число 0, для удаления данной категории.", 
+                "{FFFFFF}Enter a category value "PC_COLOR_1"%s{FFFFFF}:\n\
+                Use the number 0 to remove this category.", 
             promo_code_category[ promo_code_player[playerid][pcp_CategoryID][slot] ][pcc_Name]);
-            Dialog_Open(playerid, Dialog:_promo_code_ValueEdit, DIALOG_STYLE_INPUT, "Изменение значения категории", string, "Дальше", "Назад");    
+            Dialog_Open(playerid, Dialog:_promo_code_ValueEdit, DIALOG_STYLE_INPUT, "Changing the category value", string, "Select", "Back");
             return 1;
         }
     }
@@ -614,7 +626,7 @@ DialogResponse:_promo_code_CreateError(playerid, response, listitem, inputtext[]
 DialogResponse:_promo_code_Name(playerid, response, listitem, inputtext[])
 {
     if(!response) return Dialog_Show(playerid, Dialog:_promo_code_Create);
-    if(strlen(inputtext) < 3 || strlen(inputtext) >= PC_MAX_NAME_SIZE) return Dialog_Open(playerid, Dialog:_promo_code_Name, DIALOG_STYLE_INPUT, "Название промокода", "{FFFFFF}Введите название промокода от {FF0000}3 до "#PC_MAX_NAME_SIZE" {FFFFFF}символов:", "Дальше", "Назад");
+    if(strlen(inputtext) < 3 || strlen(inputtext) >= PC_MAX_NAME_SIZE) return Dialog_Open(playerid, Dialog:_promo_code_Name, DIALOG_STYLE_INPUT, "Promo code name", "{FFFFFF}Enter the name of the promo code from 3 to "#PC_MAX_NAME_SIZE" characters:", "Select", "Back");
 
     if(promo_code_player[playerid][pcp_EditPromoCode][0] == true) promo_code_player[playerid][pcp_EditPromoCode][1] = true;
     format(promo_code_player[playerid][pcp_Name], PC_MAX_NAME_SIZE, inputtext);
@@ -625,7 +637,7 @@ DialogResponse:_promo_code_Name(playerid, response, listitem, inputtext[])
 DialogResponse:_promo_code_Activation(playerid, response, listitem, inputtext[])
 {
     if(!response) return Dialog_Show(playerid, Dialog:_promo_code_Create);
-    if(strval(inputtext) < 0) return Dialog_Open(playerid, Dialog:_promo_code_Activation, DIALOG_STYLE_INPUT, "Количество активаци", "{FFFFFF}Введите количество активаций промокода:\nИспользуйте число 0 для бесконечного количества активаций.", "Дальше", "Назад");
+    if(strval(inputtext) < 0) return Dialog_Open(playerid, Dialog:_promo_code_Activation, DIALOG_STYLE_INPUT, "Number of activations", "{FFFFFF}Enter the number of activations:\nUse 0 for an eternal number of activations.", "Select", "Back");
 
     if(promo_code_player[playerid][pcp_EditPromoCode][0] == true) promo_code_player[playerid][pcp_EditPromoCode][1] = true;
     promo_code_player[playerid][pcp_RemainingActivationCount] = (strval(inputtext) <= 0) ? (-1):(strval(inputtext));
@@ -636,7 +648,7 @@ DialogResponse:_promo_code_Activation(playerid, response, listitem, inputtext[])
 DialogResponse:_promo_code_ExpirationDate(playerid, response, listitem, inputtext[])
 {
     if(!response) return Dialog_Show(playerid, Dialog:_promo_code_Create);
-    if(strval(inputtext) < 0) return Dialog_Open(playerid, Dialog:_promo_code_ExpirationDate, DIALOG_STYLE_INPUT, "Срок действия", "{FFFFFF}Введите срок действия промокода в днях:\nИспользуйте число 0 для бесконечного срока действия.", "Дальше", "Назад");
+    if(strval(inputtext) < 0) return Dialog_Open(playerid, Dialog:_promo_code_ExpirationDate, DIALOG_STYLE_INPUT, "Validity period", "{FFFFFF}Enter validity period in days:\nUse 0 for eternal", "Select", "Back");
 
     if(promo_code_player[playerid][pcp_EditPromoCode][0] == true) promo_code_player[playerid][pcp_EditPromoCode][1] = true;
     promo_code_player[playerid][pcp_ExpirationDate] = strval(inputtext);
@@ -654,7 +666,7 @@ DialogCreate:_promo_code_SelectCategory(playerid)
         if(x >= PC_MAX_CATEGORY || promo_code_category[x][pcc_Create] == false) break;
         if(line_max <= PC_MAX_DIALOG_LISTITEM_SIZE-1)
         {
-            format(string, sizeof(string), "%s%s\t%s\n", string, promo_code_category[x][pcc_Name], (promo_code_player[playerid][pcp_CategoryUsed][x] == true) ? (""PC_COLOR_1"Используется"):(""));
+            format(string, sizeof(string), "%s%s\t%s\n", string, promo_code_category[x][pcc_Name], (promo_code_player[playerid][pcp_CategoryUsed][x] == true) ? (""PC_COLOR_1"Is used"):(""));
             if(x >= PC_MAX_CATEGORY -1)
             {
                 if(promo_code_player[playerid][pcp_CategoryPage] >= 1) block_back_button = 1;
@@ -665,19 +677,19 @@ DialogCreate:_promo_code_SelectCategory(playerid)
         if(line_max >= PC_MAX_DIALOG_LISTITEM_SIZE+1)
         {
             block_back_button = 2;
-            strcat(string, "> Дальше\n");
-            if(promo_code_player[playerid][pcp_CategoryPage] >= 1) strcat(string, "< Назад\n");
+            strcat(string, "> Further\n");
+            if(promo_code_player[playerid][pcp_CategoryPage] >= 1) strcat(string, "< Back\n");
             break;
         }
     }
     if(promo_code_player[playerid][pcp_CategoryPage] >= 1 && block_back_button == 0 || block_back_button == 1)
     {
-        strcat(string, "< Назад\n");
+        strcat(string, "< Back\n");
         promo_code_player[playerid][pcp_CategoryPageBackButton] = line_max + ((block_back_button == 0) ? (1):(2));
     }
 
-    if(line_max == 0) return Dialog_Open(playerid, Dialog:_promo_code_CategoryNo, DIALOG_STYLE_MSGBOX, "Добавить категорию", "{FFFFFF}Нет созданных категорий.", "Закрыть", "Назад");
-    Dialog_Open(playerid, Dialog:_promo_code_SelectCategory, DIALOG_STYLE_TABLIST, "Добавить категорию", string, "Выбрать", "Назад");
+    if(line_max == 0) return Dialog_Open(playerid, Dialog:_promo_code_CategoryNo, DIALOG_STYLE_MSGBOX, "Add a category", "{FFFFFF}No categories created.", "Close", "Back");
+    Dialog_Open(playerid, Dialog:_promo_code_SelectCategory, DIALOG_STYLE_TABLIST, "Add a category", string, "Select", "Back");
     return 1;
 }
 
@@ -728,8 +740,8 @@ DialogResponse:_promo_code_SelectCategory(playerid, response, listitem, inputtex
             promo_code_player[playerid][pcp_DialogListitem] = slot;
             
             new string[54+PC_MAX_CATEGORY_NAME_SIZE];
-            format(string, sizeof(string), "{FFFFFF}Введите значение категории "PC_COLOR_1"%s{FFFFFF}:", promo_code_category[slot][pcc_Name]);
-            Dialog_Open(playerid, Dialog:_promo_code_Value, DIALOG_STYLE_INPUT, "Добавить категорию", string, "Дальше", "Назад");
+            format(string, sizeof(string), "{FFFFFF}Enter the category value "PC_COLOR_1"%s{FFFFFF}:", promo_code_category[slot][pcc_Name]);
+            Dialog_Open(playerid, Dialog:_promo_code_Value, DIALOG_STYLE_INPUT, "Add a category", string, "Select", "Back");
             return 1;
         }
     }
@@ -787,7 +799,7 @@ DialogResponse:_promo_code_Value(playerid, response, listitem, inputtext[])
     }
     else 
     {
-        Dialog_Open(playerid, Dialog:_promo_code_CategoryNo, DIALOG_STYLE_MSGBOX, "Добавить категорию", "{FFFFFF}Достигнут лимит по количеству добавления категорий.", "Закрыть", "Назад");
+        Dialog_Open(playerid, Dialog:_promo_code_CategoryNo, DIALOG_STYLE_MSGBOX, "Add a category", "{FFFFFF}Category limit reached.", "Close", "Back");
         return 1;
     }
 
@@ -834,7 +846,9 @@ stock PromoCodeList(playerid)
 
 DialogCreate:_promo_code_List(playerid)
 {
-    new string[ ((PC_MAX_NAME_SIZE+19+19+21) * PC_MAX_DIALOG_LISTITEM_SIZE) + 75 ] = "{FFFFFF}Номер\t{FFFFFF}Название\t{FFFFFF}Кол-во активаций\t{FFFFFF}Статус\n", activation[11+10];
+    new string[ ((PC_MAX_NAME_SIZE+19+19+21) * PC_MAX_DIALOG_LISTITEM_SIZE) + 67 ] = "{FFFFFF}Number\t{FFFFFF}Name\t{FFFFFF}Activations\t{FFFFFF}Status\n", 
+        activation[14+10]
+    ;
     for(new x; x < PC_MAX_DIALOG_LISTITEM_SIZE; x ++) promo_code_player[playerid][pcp_ListDialogListitemIDs][x] = -1;
 
     new line_max, block_back_button;
@@ -845,15 +859,15 @@ DialogCreate:_promo_code_List(playerid)
         if(line_max <= PC_MAX_DIALOG_LISTITEM_SIZE-1)
         {
             promo_code_player[playerid][pcp_ListDialogListitemIDs][line_max] = x;
-            if(promo_code[x][pc_RemainingActivationCount] != -1) format(activation, sizeof(activation), "Осталось %d", promo_code[x][pc_RemainingActivationCount]);
-            else format(activation, sizeof(activation), "%d активаций", promo_code[x][pc_ActivationCount]);
+            if(promo_code[x][pc_RemainingActivationCount] != -1) format(activation, sizeof(activation), "Left %d", promo_code[x][pc_RemainingActivationCount]);
+            else format(activation, sizeof(activation), "%d activations", promo_code[x][pc_ActivationCount]);
 
             format(string, sizeof(string), "%s#%d\t%s\t%s\t%s\n", 
                 string, 
                 line_max+1+(promo_code_player[playerid][pcp_ListPage] * PC_MAX_DIALOG_LISTITEM_SIZE), 
                 promo_code[x][pc_Name], 
                 activation,
-                (promo_code[x][pc_ExpirationDate] != 0 && promo_code[x][pc_ExpirationDate] <= gettime()) ? (""PC_COLOR_3"Истек") : (promo_code[x][pc_RemainingActivationCount] == 0) ? (""PC_COLOR_3"Закончился"):(""PC_COLOR_2"Активный")
+                (promo_code[x][pc_ExpirationDate] != 0 && promo_code[x][pc_ExpirationDate] <= gettime()) ? (""PC_COLOR_3"Expired") : (promo_code[x][pc_RemainingActivationCount] == 0) ? (""PC_COLOR_3"Ended"):(""PC_COLOR_2"Active")
             );
 
             if(x >= PC_MAX_PROMO_CODE -1)
@@ -866,18 +880,18 @@ DialogCreate:_promo_code_List(playerid)
         if(line_max >= PC_MAX_DIALOG_LISTITEM_SIZE+1)
         {
             block_back_button = 2;
-            strcat(string, "> Дальше\n");
-            if(promo_code_player[playerid][pcp_ListPage] >= 1) strcat(string, "< Назад\n");
+            strcat(string, "> Further\n");
+            if(promo_code_player[playerid][pcp_ListPage] >= 1) strcat(string, "< Back\n");
             break;
         }
     }
     if(promo_code_player[playerid][pcp_ListPage] >= 1 && block_back_button == 0 || block_back_button == 1)
     {
-        strcat(string, "< Назад\n");
+        strcat(string, "< Back\n");
         promo_code_player[playerid][pcp_ListBackButton] = line_max + ((block_back_button == 0) ? (1):(2));
     }
-    if(line_max == 0) return Dialog_Message(playerid, "Список созданных промокодов", "{FFFFFF}Нет созданных промокодов.", "Закрыть");
-    Dialog_Open(playerid, Dialog:_promo_code_List, DIALOG_STYLE_TABLIST_HEADERS, "Список созданных промокодов", string, "Выбрать", "Отмена");
+    if(line_max == 0) return Dialog_Message(playerid, "List of promo codes", "{FFFFFF}No promo codes.", "Close");
+    Dialog_Open(playerid, Dialog:_promo_code_List, DIALOG_STYLE_TABLIST_HEADERS, "List of promo codes", string, "Select", "Cancel");
     return 1;
 }
 
@@ -996,8 +1010,8 @@ DialogResponse:_promo_code_Savechanges(playerid, response, listitem, inputtext[]
         }
         if(max_category == 0)
         {
-            Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Принятие изменений", 
-                "{FFFFFF}Промокод не может быть сохранен без категорий.", 
+            Dialog_Open(playerid, Dialog:_promo_code_CreateError, DIALOG_STYLE_MSGBOX, "Acceptance of change", 
+                "{FFFFFF}Select a category for the promo code.", 
             "Закрыть", "Назад");
             return 1;
         }
