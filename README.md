@@ -1,5 +1,5 @@
 # promo-code
-Creating promo codes with categories in SAMP
+Creating promo codes with categories in SAMP 
 
 ![Crosshair](https://raw.githubusercontent.com/Bren828/promo-code/main/preview.gif)
 
