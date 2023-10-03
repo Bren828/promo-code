@@ -5,9 +5,9 @@
 *   ---------------------------------------------------
 *
 *	Creater - @Bren828 					
-*									6 July 2023
+*									6 October 2023
 *
-*   Version: 1.1
+*   Version: 1.1.1
 *
 *   ---------------------------------------------------
 *
@@ -169,6 +169,12 @@
 	#error '#define PC_MAX_CATEGORY_IN_PROMO_CODE' can't be more than '#define PC_MAX_CATEGORY'
 
 #endif 
+
+
+#if !defined _mdialog_included
+    #error "Please include mdialog.inc before promo-code.inc"
+#endif
+
 
 enum
 {
