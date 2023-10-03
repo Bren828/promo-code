@@ -11,6 +11,9 @@ Creating promo codes with categories in SAMP
 * [Definition](https://github.com/Bren828/promo-code#definition)
 * [Enum](https://github.com/Bren828/promo-code#enum)
 
+## Dependencies
+* [mdialog](https://github.com/Open-GTO/mdialog)
+
 ## Installation
 
 Include in your code and begin using the library:
